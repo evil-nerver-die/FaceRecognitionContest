@@ -482,7 +482,7 @@ class FacenetEngine(object):
         """
         Make embedding vector (128-dimensions) from one image
         """
-        errcode, embed, face_img_receiver_mode = 0, np.array([]), True
+        errcode, embed, face_img_receiver_mode = 0, np.array([]), False
         if image_data is None:
             errcode, face = self.extract_face(input_image)
         else:
