@@ -10,6 +10,7 @@ from uploads.route import uploads, files
 from engine.route import engine
 from api.api import api
 
+# 1. Flask 2. Django
 # アプリケーションのインスタンス生成
 app = Flask(__name__,
             instance_relative_config=True,
