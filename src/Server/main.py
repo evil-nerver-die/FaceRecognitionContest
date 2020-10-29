@@ -48,4 +48,4 @@ if __name__ == "__main__":
     # アプリケーション開始
     # TODO: Trungとの確認が必要
     # 確認内容: threaded=Trueに変えた方が良い
-    app.run(host='0.0.0.0', port=3000, ssl_context=context, threaded=False, debug=True)
+    app.run(host='0.0.0.0', port=3000, ssl_context=context, threaded=False, debug=False)
