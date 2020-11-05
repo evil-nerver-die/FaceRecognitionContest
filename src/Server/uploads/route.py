@@ -105,7 +105,7 @@ def upload_binary():
         else:
             response = jsonify({
                 "errcode": errcode,
-                "msg": "写真には1つの顔のみを許可します。再度ご確認ください。"
+                "msg": "Only one face is allowed in the photo. Please check again."
             })
 
     except Exception as e:
