@@ -1,11 +1,11 @@
-# 標準ライブラリ
+# Standard library
 
-# 関連外部ライブラリ
+# Related external libraries
 from flask import Flask, render_template
 from flask_uploads import configure_uploads
 import ssl
 
-# 内部ライブラリ
+# Internal library
 from uploads.route import uploads, files
 from engine.route import engine
 from api.api import api
@@ -48,4 +48,4 @@ if __name__ == "__main__":
     # アプリケーション開始
     # TODO: Trungとの確認が必要
     # 確認内容: threaded=Trueに変えた方が良い
-    app.run(host='0.0.0.0', port=3000, ssl_context=context, threaded=False, debug=False)
+    app.run(host='0.0.0.0', port=3000, ssl_context=context, threaded=False, debug=True)

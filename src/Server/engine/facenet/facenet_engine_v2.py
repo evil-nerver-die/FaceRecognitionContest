@@ -103,7 +103,7 @@ class FacenetEngine(object):
             errcode, img_encode = self.make_encode(image_path, image_data=image_data)
 
         if errcode is 0:
-            # get all encodes fromdb
+            # get all encodes from db
             all_anchors = self.all_anchors
 
             distances = list()
@@ -112,7 +112,8 @@ class FacenetEngine(object):
                     distances.append(distance.euclidean(img_encode, anchor['encode']))
 
             if FacenetEngine.__debug_mode is True:
-                print('img_coode = {}'.format(type(img_encode)))
+                print('img_code = {}'.format(type(img_encode)))
+                print("img_code = {} ".format(img_encode))
                 print("length of all encode in database: {}".format(len(all_anchors)))
                 print("min of distances = {}".format(min(distances)))
                 print("max of distances = {}".format(max(distances)))
@@ -485,6 +486,9 @@ class FacenetEngine(object):
         errcode, embed, face_img_receiver_mode = 0, np.array([]), False
         if image_data is None:
             errcode, face = self.extract_face(input_image)
+            faces = []
+            faces.append(face)
+            embed = self.convert(faces)
         else:
             # TODO: (CongThanh) Consider when merge with facenet_engine.py
             # Add-in for face data receiver

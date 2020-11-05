@@ -46,7 +46,7 @@ class SingletonMetaDB(type):
 class DbController(metaclass=SingletonMetaDB):
     client = None
     retry_times = 5
-    retry_interval = 5   # 単位: ms
+    retry_interval = 5   # Unit: ms
 
     def __init__(self):
         """

@@ -15,7 +15,7 @@ from engine.facenet.facenet_engine import FacenetEngine
 from database.db_utilities import DBUtility
 from watcher.watcher import Watcher
 
-# インスタンス生成
+# Instance generation
 facenet = FacenetEngine()
 db_util = DBUtility()
 watcher = Watcher()
@@ -23,7 +23,9 @@ watcher = Watcher()
 uploads = Blueprint('uploads', __name__)
 files = UploadSet('files', DATA + DOCUMENTS)
 
-# デバッグモード
+SAVING_IMAGE_FOLDER_NAME = "images"
+
+# Debug mode
 DEBUG_MODE = True
 
 
@@ -35,7 +37,7 @@ def upload_binary():
     """
     # set img_dir
     cur_path = os.path.dirname(os.path.abspath(__file__))
-    img_dir = os.path.join(cur_path, "images")
+    img_dir = os.path.join(cur_path, SAVING_IMAGE_FOLDER_NAME)
 
     if os.path.exists(img_dir) is False:
         os.mkdir(img_dir)
@@ -43,8 +45,11 @@ def upload_binary():
     try:
         # Read stream data
         data = request.stream.read()
+
+        # print("data = {}".format(data))
+
         # TODO: Duyとの確認
-        # dataのフォーマットを確認し、コメントを追加する。
+        # Check the format of data and add a comment.
         # Get person_name and person_id from stream
         person_name = data[:data.find(b'_')]
         person_name = person_name.decode('utf-8')
@@ -52,9 +57,10 @@ def upload_binary():
         data = data[data.find(b'_') + 1:]
         person_id = data[:data.find(b'_')]
         person_id = person_id.decode('utf-8')
+        # TODO: change /9
         data = data[data.find(b'/9'):]
 
-        # 半角スペースと全角スペースを変換する。
+        # Convert half-width space and full-width space.
         person_name = person_name.replace(" ", "-")
         person_name = person_name.replace("　", "-")
         person_id = person_id.replace(" ", "")

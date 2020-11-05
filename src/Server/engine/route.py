@@ -27,6 +27,8 @@ db_util = DBUtility()
 engine = Blueprint('engine', __name__)
 files = UploadSet('files', DATA + DOCUMENTS)
 
+SAVING_RECOGNITION_IMAGES = "recognition_images"
+
 
 @engine.route("/api/engine/predict", methods=['GET', 'POST'])
 def recognize():
@@ -37,7 +39,7 @@ def recognize():
     """
     # Set directory for recognition image
     cur_path = os.path.dirname(os.path.abspath(__file__))
-    img_dir = os.path.join(cur_path, "recognition_images")
+    img_dir = os.path.join(cur_path, SAVING_RECOGNITION_IMAGES)
     if os.path.exists(img_dir) is False:
         os.mkdir(img_dir)
 
