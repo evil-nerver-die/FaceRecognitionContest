@@ -98,7 +98,7 @@ function Authentication(props) {
     const [openSelectDialog, setOpenSelectDialog] = React.useState(false);
     const [dialogMsg, setDialogMsg] = React.useState("");
     const [enableWebcam, setEnableWebcam] = React.useState(true);
-    const [authVertification, setAuthVertification] = React.useState(false);
+    const [authVerification, setAuthVerification] = React.useState(false);
     const [state, setState] = React.useState({
         name: "",
         id: "",
@@ -140,16 +140,16 @@ function Authentication(props) {
         if (enableWebcam) {
             var imageSrc = getImage();
             setImage(imageSrc);
-            setAuthVertification(true);
+            setAuthVerification(true);
         }
         else {
-            alert("カメラをオンにしてください。")
+            alert("Please turn on the camera")
         }
     }
 
     const onAuthentication = () => {
         setEnableWebcam(false);
-        setAuthVertification(false);
+        setAuthVerification(false);
         if (!loading) {
             setSuccessAuth(false);
             setLoading(true);
@@ -168,7 +168,7 @@ function Authentication(props) {
                 console.log({msg:msg});
                 handleOpenDialog();
             } else {
-                alert("エラー:" + data.msg.toString());
+                alert("Error:" + data.msg.toString());
                 // re render parent
                 props.rerenderParentCallback();
             }
@@ -189,7 +189,7 @@ function Authentication(props) {
         // TODO: send true label to server
         var body = state;
         if(state.id===''){
-            alert("正解IDを選択してください。")
+            alert("Please select the correct ID")
             setOpenSelectDialog(true);
             return;
         }
@@ -202,10 +202,10 @@ function Authentication(props) {
         }).then(function (data) {
             console.log(data);
             if(data.errcode!=-1){
-                alert("正解ラベルをSubmit完了しました。")
+                alert("Submitted the correct label.")
             }
             else{
-                alert("エラー: "+data.msg);
+                alert("Error: "+data.msg);
             }
         })
         // re render parent
@@ -228,7 +228,7 @@ function Authentication(props) {
         }).then(function (data) {
             console.log(data);
             if(data.errcode!=-1){
-                alert("正解ラベルをSubmit完了しました。")
+                alert("Submitted the correct label.")
             }
             else{
                 alert("error: "+data.msg);
@@ -247,7 +247,7 @@ function Authentication(props) {
 
     const renderAuthInfo = () => {
         return (
-            <div>Recognition結果:{authenticationInfo}</div>
+            <div>Recognition result:{authenticationInfo}</div>
         )
     }
 
@@ -258,7 +258,7 @@ function Authentication(props) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Recognition結果"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{"Recognition result"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         システムがRecognitionしたID: {dialogMsg.id != -1 ? dialogMsg.id : "できませんでした。"}
@@ -266,10 +266,10 @@ function Authentication(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseDialog} color="primary">
-                        間違い
+                        No
           </Button>
                     <Button onClick={handleAuthenticated} color="primary" autoFocus>
-                        正解
+                        Yes
           </Button>
                 </DialogActions>
             </Dialog>
@@ -277,18 +277,18 @@ function Authentication(props) {
     }
 
     const closeAuthVer = () => {
-        setAuthVertification(false);
+        setAuthVerification(false);
     }
 
-    const renderAuthVertificationDialog = () => {
+    const renderAuthVerificationDialog = () => {
         return (
             <Dialog
-                open={authVertification}
+                open={authVerification}
                 onClose={closeAuthVer}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"以下の画像でRecognitionしますか?"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{"Do you want to recognize this image"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         {image ?
@@ -298,10 +298,10 @@ function Authentication(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={closeAuthVer} color="primary">
-                        いいえ、撮り直します。
+                        No, retake the image.
           </Button>
                     <Button onClick={onAuthentication} color="primary" autoFocus>
-                        はい、Submitします。
+                        Yes, submit.
           </Button>
                 </DialogActions>
             </Dialog>
@@ -318,7 +318,7 @@ function Authentication(props) {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"正解ID選択"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{"Correct ID selection"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
                             <FormControl className={classes.formControl}>
@@ -393,7 +393,7 @@ function Authentication(props) {
 
             </Grid>
             {renderMessageDialog()}
-            {renderAuthVertificationDialog()}
+            {renderAuthVerificationDialog()}
             {renderSelectIdDialog()}
         </Paper>
 

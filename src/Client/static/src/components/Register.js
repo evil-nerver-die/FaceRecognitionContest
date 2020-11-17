@@ -116,7 +116,7 @@ function Register(props) {
     const [success, setSuccess] = React.useState(false);
     const [enableWebcam, setEnableWebcam] = React.useState(true);
     const [showImg, setShowImg] = React.useState(false);
-    const [registerVertification, setRegisterVertification] = React.useState(false);
+    const [registerVerification, setRegisterVerification] = React.useState(false);
 
     const timer = React.useRef();
 
@@ -124,7 +124,7 @@ function Register(props) {
     const registerPicture = () => {
         setEnableWebcam(false);
         setShowImg(true);
-        setRegisterVertification(false);
+        setRegisterVerification(false);
         const name = state.name;
         const id = state.id;
         console.log(state.name + "_" + state.id);
@@ -139,7 +139,7 @@ function Register(props) {
             setLoading(false);
             setShowImg(false);
             if (data.errcode == 0) {
-                alert("Registerが成功しました。")
+                alert("Registration Successful")
                 setState({
                     name: "",
                     id: "",
@@ -147,7 +147,7 @@ function Register(props) {
                 })
                 setUserID("");
             } else {
-                alert("Registerが失敗しました。" + data.msg);
+                alert("Registration Failed" + data.msg);
             }
             setEnableWebcam(false);
             setShowInputForm(false);
@@ -161,17 +161,17 @@ function Register(props) {
     const handleSendPictureButton = () => {
         if (enableWebcam) {
             if(state.id===""){
-                alert("IDを選択してください。");
+                alert("Please select an ID");
                 return;
             }
             const imageSrc = webcamRef.current.getScreenshot();
             setImage(imageSrc);
             setShowImg(true);
             setShowInputForm(false);
-            setRegisterVertification(true);
+            setRegisterVerification(true);
         }
         else {
-            alert("カメラをオンにしてください。");
+            alert("Please turn on the camera");
         }
     }
 
@@ -203,7 +203,7 @@ function Register(props) {
         var userInfo = getUserInfoFromID(userid);
         return (
             <div className={classes.textField}>
-                ID: {userid} 氏名: {userInfo.name} 部署：{userInfo.department}
+                ID: {userid} name: {userInfo.name} department：{userInfo.department}
             </div>
         )
     }
@@ -243,32 +243,32 @@ function Register(props) {
     }
 
     const closeRegisterVer = () => {
-        setRegisterVertification(false);
+        setRegisterVerification(false);
         setShowInputForm(true);
     }
 
-    const renderRegisterVertificationDialog = () => {
+    const renderRegisterVerificationDialog = () => {
         return (
             <Dialog
-                open={registerVertification}
+                open={registerVerification}
                 onClose={closeRegisterVer}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"以下の画像をSubmitしますか?"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{"Do you want to submit this image?"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         {showImg ?
                             <img width="320" height="240" src={`${image}`} />
-                            : <div>画像が存在しません。</div>}
+                            : <div>This image does not exist.</div>}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={closeRegisterVer} color="primary">
-                        いいえ、撮り直します。
+                        No, retake the image.
           </Button>
                     <Button onClick={registerPicture} color="primary" autoFocus>
-                        はい、Submitします。
+                        Yes, submit.
           </Button>
                 </DialogActions>
             </Dialog>
@@ -302,7 +302,7 @@ function Register(props) {
                 <Divider />
                 {showInputForm ? renderUserInfo(userID) : ""}
                 {showInputForm ? renderPersonInfoDropdownForm() : ""}
-                {renderRegisterVertificationDialog()}
+                {renderRegisterVerificationDialog()}
                 <Divider />
             </Grid>
         </Paper>
