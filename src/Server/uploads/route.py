@@ -100,6 +100,7 @@ def upload_binary():
 
         # Make encode
         errcode, img_encode = facenet.make_encode(img_file_path)
+        # print("img_encode: {}".format(img_encode))
         if errcode is 0:
             encode = img_encode.flatten()
             encode = encode.tolist()

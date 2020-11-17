@@ -104,7 +104,8 @@ class FacenetEngine(object):
 
         if errcode is 0:
             # get all encodes fromdb
-            all_anchors = self.all_anchors
+            # all_anchors = self.all_anchors
+            all_anchors = db_util.get_all_encode()
 
             distances = list()
             for anchor in all_anchors:

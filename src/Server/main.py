@@ -17,17 +17,17 @@ app = Flask(__name__,
             static_folder="../Client/static",
             template_folder="../Client/templates")
 
-# アプリケーションの設定
-# sslの設定
+# Application settings
+# ssl setting
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
 context.load_cert_chain('cert.crt', 'server_secret_wo_pass.key')
 
 app.config.from_pyfile('flask.cfg')
 
-# ファイルをアップロードできるための設定
+# Settings for uploading files
 configure_uploads(app, files)
 
-# ルートの設定
+# Route setting
 app.register_blueprint(uploads)
 app.register_blueprint(engine)
 app.register_blueprint(api)
@@ -35,18 +35,18 @@ app.register_blueprint(api)
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# URLの設定
+# URL setting
 @app.route('/')
 def main():
     return render_template('index.html')
 
-# TODO: Duyとの確認が必要
-# 確認内容：　以下の行のソースコードの意味は?　不必要であれば、削除しても良い？
+# TODO: Duy need to confirm
+# Confirmation: What does the source code in the following line mean? Can I delete it if it is unnecessary?
 # @app.route('/statistic')
 
 
 if __name__ == "__main__":
-    # アプリケーション開始
+    # Application start
     # TODO: Trungとの確認が必要
-    # 確認内容: threaded=Trueに変えた方が良い
-    app.run(host='0.0.0.0', port=3000, ssl_context=context, threaded=False, debug=True)
+    # Confirmation: It is better to change to threaded = True
+    app.run(host='0.0.0.0', port=3000, ssl_context=context, threaded=False, debug=False)

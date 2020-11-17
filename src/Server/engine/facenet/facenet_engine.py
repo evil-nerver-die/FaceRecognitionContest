@@ -63,7 +63,7 @@ class FacenetEngine(object):
 
         # set for facenet model
         self.__model_path = model_path
-        self.model = load_model(self.__model_path, compile=False)
+        self.model = load_model(self.__model_path, compile=True)
 
         # transfer learning model
         self.transfer_model = self.make_transfer_learning_model()
@@ -272,6 +272,7 @@ class FacenetEngine(object):
             embed = self.encoding(self.model, face)
             new.append(embed)
         new = np.asarray(new)
+        print("new in facenet_engine: {}".format(new))
         # Checking new dataset dimemsion
         return new
 
@@ -288,9 +289,11 @@ class FacenetEngine(object):
         # Transform face into one sample
         samples = np.expand_dims(faces, axis=0)
         # Make prediction to get encoding
+        print("<<<<<<<Error here>>>>>>>")
         Y_hat = model.predict(samples)
         # TODO: Normalizationが必要かどうかを要検討
         # Y_hat_norm = [((i - min(Y_hat[0])) / (max(Y_hat[0]) - min(Y_hat[0]))) for i in Y_hat[0]]
+        print("Y_hat: {}".format(Y_hat))
 
         return Y_hat[0]
 
@@ -476,7 +479,7 @@ class FacenetEngine(object):
         errcode, face = self.extract_face(input_image)
 
         # TODO: CongThanh test performance
-        face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
+        #face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
         if errcode is 0:
             faces = []
             faces.append(face)
