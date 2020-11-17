@@ -2106,6 +2106,9 @@
 2020-11-01 12:27:25,572 - ERROR - test error test10_001_error
 2020-11-01 12:27:25,573 - INFO - test info: test20_001_info
 2020-11-01 12:27:25,574 - WARNING - test info: test30_001_warning
+<<<<<<< HEAD
 2020-11-07 15:48:29,233 - ERROR - test error test10_001_error
 2020-11-07 15:48:29,235 - INFO - test info: test20_001_info
 2020-11-07 15:48:29,237 - WARNING - test info: test30_001_warning
+=======
+>>>>>>> main
