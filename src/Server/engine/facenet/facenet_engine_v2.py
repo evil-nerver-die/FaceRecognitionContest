@@ -33,9 +33,9 @@ class FacenetEngine(object):
     """
     facenet engine class
     """
-    # クラス変数
-    # encodeのベクトルサイズ = 128, それぞれの値は-2~2である。
-    # そのため、max_distance = 11.3
+    # Class variables
+    # the encode vector size of = 128, each value is -2 ~ 2.
+    # Therefore, max_distance = 11.3
     __distance_threshold = 11.0
     __debug_mode = True
     __bound = 18
@@ -43,7 +43,7 @@ class FacenetEngine(object):
 
     def __init__(self):
         """
-        コンストラクト
+        construct
         """
         cur_dir = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 
@@ -51,7 +51,7 @@ class FacenetEngine(object):
         model_path = "./model/keras-facenet/model/facenet_keras.h5"
         model_path = os.path.join(cur_dir, model_path)
 
-        # モデルパスの存在チェック
+        # Existence check of model path
         if osp.exists(model_path) is False:
             raise ValueError('{} not Exist'.format(model_path))
 
@@ -103,7 +103,7 @@ class FacenetEngine(object):
             errcode, img_encode = self.make_encode(image_path, image_data=image_data)
 
         if errcode is 0:
-            # get all encodes fromdb
+            # get all encodes from db
             all_anchors = self.all_anchors
 
             distances = list()
@@ -112,7 +112,8 @@ class FacenetEngine(object):
                     distances.append(distance.euclidean(img_encode, anchor['encode']))
 
             if FacenetEngine.__debug_mode is True:
-                print('img_coode = {}'.format(type(img_encode)))
+                print('img_code = {}'.format(type(img_encode)))
+                print("img_code = {} ".format(img_encode))
                 print("length of all encode in database: {}".format(len(all_anchors)))
                 print("min of distances = {}".format(min(distances)))
                 print("max of distances = {}".format(max(distances)))
@@ -307,23 +308,23 @@ class FacenetEngine(object):
     @staticmethod
     def l2_normalizer(x, axis=-1, epsilon=1e-10):
         """
-        標準化
+        Standardization
         """
         output = x / np.sqrt(np.maximum(np.sum(np.square(x), axis=axis, keepdims=True), epsilon))
         return output
 
     def make_faces_encoding_labels(self):
         """
-        画像より128次元の特徴値に変換する
+        Convert from image to 128-dimensional feature value
         """
         faces, labels = self.load_data_set()
 
-        print(faces.shape)  # データ数, 160, 160, 3
-        print(labels.shape)  # データ数
+        print(faces.shape)  # Number of data, 160, 160, 3
+        print(labels.shape)  # The number of data
 
         # Encoding faces
         faces_encoding = self.convert(faces)
-        print(faces_encoding.shape)  # データ数, 128
+        print(faces_encoding.shape)  # Number of data, 128
 
         # Normalize
         faces_encoding = self.l2_normalizer(faces_encoding)
