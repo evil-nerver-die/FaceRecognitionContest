@@ -48,6 +48,5 @@ def main():
 if __name__ == "__main__":
     # Application start
     # TODO: Trungとの確認が必要
-<<<<<<< HEAD
     # Confirmation: It is better to change to threaded = True
     app.run(host='0.0.0.0', port=3000, ssl_context=context, threaded=False, debug=False)
