@@ -119,19 +119,19 @@ class DBUtility(object):
 
         try:
             query = {
-              "$expr": {"$eq": ["$correct_id", "$wrong_id"] }
+                "$expr": {"$eq": ["$correct_id", "$wrong_id"]}
             }
             correct_length = self._db_ctrl.find(query, collection_name="talent5__feedback_collection").count()
 
             query2 = {
-            "$expr": {"$ne": ["$correct_id", "$wrong_id"] }
+                "$expr": {"$ne": ["$correct_id", "$wrong_id"]}
             }
             wrong_list = list(self._db_ctrl.find(query2, collection_name="talent5__feedback_collection"))
 
             length = correct_length + len(wrong_list)
 
             if length > 0:
-                correct_ratio = correct_length/length
+                correct_ratio = correct_length / length
                 res = {
                     "correct_ratio": correct_ratio,
                     "wrong_list": wrong_list

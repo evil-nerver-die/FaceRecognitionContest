@@ -50,7 +50,11 @@ class TestFacenetEngine(unittest.TestCase):
         test make_faces_encoding_labels
         :return:
         """
+        # Action
         faces_encoding, labels = self.engine.make_faces_encoding_labels()
+
+        # Assert
+        self.assertEqual(labels, "ABC")
         print(labels)
 
     def test_train(self):
