@@ -24,8 +24,8 @@ def send_err_file():
     print(status_code)
 
     if status_code == 202:
-        msg = str("エラーのログは開発者に通信しました！返事までお待ちして下さい。")
+        msg = str("The error log has communicated to the developer! Please wait for a reply.")
         return jsonify(msg=msg), 202
     else:
-        msg = str("エラーのログを通信できません！")
+        msg = str("Unable to communicate error log!")
         return jsonify(msg=msg), 500

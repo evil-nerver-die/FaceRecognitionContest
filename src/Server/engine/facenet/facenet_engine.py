@@ -304,7 +304,7 @@ class FacenetEngine(object):
 
     def make_faces_encoding_labels(self):
         """
-        画像より128次元の特徴値に変換する
+        Convert from image to 128-dimensional feature value
         """
         faces, labels = self.load_data_set()
 

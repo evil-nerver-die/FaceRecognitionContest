@@ -27,6 +27,8 @@ from log.logger import SystemLogger
 
 class TestLog(unittest.TestCase):
 
+    today = datetime.datetime.timestamp(datetime.datetime.now())
+
     @classmethod
     def setUpClass(cls):
         """

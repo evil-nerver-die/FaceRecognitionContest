@@ -26,7 +26,7 @@ class TestDataBase(unittest.TestCase):
 
     def test_001_insert_staff(self):
         """
-        test insert function: 正常系
+        test insert function: Normal system
         """
         test_data = {
             "_id": str(self.today),
@@ -39,7 +39,7 @@ class TestDataBase(unittest.TestCase):
 
     def test_005_insert_staff(self):
         """
-        test insert function: dupplicated id
+        test insert function: duplicated id
         """
         test_data = {
             "_id": str(self.today),
@@ -52,7 +52,7 @@ class TestDataBase(unittest.TestCase):
 
     def test_010_find_one(self):
         """
-        test find one function: 正常系
+        test find one function: Normal system
         """
         query = {"id": int(self.today)}
         res = self.db_ctrl.find_one(query)
@@ -60,8 +60,8 @@ class TestDataBase(unittest.TestCase):
 
     def test_015_find(self):
         """
-        test find function: 正常系
-        ショップ名で検索する。
+        test find function: Normal system
+        Search by shop name.
         """
         query = {"id": int(self.today)}
         res = self.db_ctrl.find(query)
@@ -74,7 +74,7 @@ class TestDataBase(unittest.TestCase):
 
     def test_101_insert_encode(self):
         """
-        test insert function: 正常系
+        test insert function: Normal system
         """
         test_data = {
             "_id": str(self.today),
@@ -88,7 +88,7 @@ class TestDataBase(unittest.TestCase):
 
     def test_105_insert_encode(self):
         """
-        test insert function: dupplicated id
+        test insert function: duplicated id
         """
         test_data = {
             "_id": str(self.today),
@@ -102,7 +102,7 @@ class TestDataBase(unittest.TestCase):
 
     def test_110_find_one(self):
         """
-        test find one function: 正常系
+        test find one function: Normal system
         """
         query = {"id": int(self.today)}
         res = self.db_ctrl.find_one(query, collection_name='talent5__encode_collection')
@@ -111,11 +111,15 @@ class TestDataBase(unittest.TestCase):
 
     def test_115_find(self):
         """
-        test find function: 正常系
-        ショップ名で検索する。
+        test find function: Normal system
+        Search by shop name.
         """
         query = {"id": int(self.today)}
         res = self.db_ctrl.find(query, collection_name='talent5__encode_collection')
+        print("res : {}".format(res))
+        # for result in res:
+        #    if len(result['encode']) == 128:
+        #        print("res = {}".format(result['encode']))
         for doc in res:
             self.assertEqual(doc["name"], "hachix")
             self.assertEqual(doc["encode"], [1, 2, 3, 4])

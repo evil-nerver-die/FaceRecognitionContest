@@ -50,9 +50,9 @@ class DbController(metaclass=SingletonMetaDB):
 
     def __init__(self):
         """
-        コンストラクタ
+        constructor
         """
-        # 設定ファイル読み込む
+        # Read the configuration file
         current_dir = path.dirname(path.abspath(__file__))
         config_file = os.path.join(current_dir, 'db_config.ini')
         abs_path_config = os.path.abspath(config_file)
@@ -94,7 +94,7 @@ class DbController(metaclass=SingletonMetaDB):
     @staticmethod
     def set_schema_collection(db, schema_file, collection_name):
         """
-        Collectionのスキーマを設定する
+        Set the collection schema
         """
         current_dir = path.dirname(path.abspath(__file__))
         json_path = os.path.join(current_dir, schema_file)
@@ -111,7 +111,7 @@ class DbController(metaclass=SingletonMetaDB):
 
     def get_collection(self, collection_name):
         """
-        対象のcollectionを選択する
+        Select the target collection
         """
         collection = None
         if collection_name == 'talent5__staff_collection':

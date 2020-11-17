@@ -63,7 +63,7 @@ def recognize():
             img_file_name = "{}.jpeg".format(now.timestamp())
             img_file_path = os.path.join(img_dir, img_file_name)
             img_data.save(img_file_path)
-            img_data = img_data.resize(160, 160)
+            # img_data = img_data.resize(160, 160)
 
             # with open(img_file_path, "wb+") as g:
             #     g.write(img_data)
@@ -93,7 +93,7 @@ def recognize():
             else:
                 response = jsonify({
                     "errcode": errcode,
-                    "msg": "写真には1つの顔のみを許可します。再度ご確認ください。"
+                    "msg": "Only one face is allowed in the photo. Please check again."
                 })
         except Exception as e:
             print(e)
@@ -120,7 +120,7 @@ def feedback():
     """
     # Set directory for recognition image
     cur_path = os.path.dirname(os.path.abspath(__file__))
-    img_dir = os.path.join(cur_path, "recognition_images")
+    img_dir = os.path.join(cur_path, SAVING_RECOGNITION_IMAGES)
     if os.path.exists(img_dir) is False:
         os.mkdir(img_dir)
 
@@ -170,7 +170,7 @@ def feedback():
             else:
                 response = jsonify({
                     "errcode": errcode,
-                    "msg": "写真には1つの顔のみを許可します。再度ご確認ください。"
+                    "msg": "Only one face is allowed in the photo. Please check again."
                 })
         except Exception as e:
             print(e)
@@ -232,7 +232,7 @@ def train():
 
             response = jsonify({
                 "errcode": 0,
-                "msg": "dummy traning method"
+                "msg": "dummy training method"
             })
         except Exception as e:
             print(e)
