@@ -1,11 +1,11 @@
-# 標準ライブラリ
+# Standard library
 
-# 関連外部ライブラリ
+# Related external libraries
 from flask import Flask, render_template
 from flask_uploads import configure_uploads
 import ssl
 
-# 内部ライブラリ
+# Internal library
 from uploads.route import uploads, files
 from engine.route import engine
 from api.api import api
